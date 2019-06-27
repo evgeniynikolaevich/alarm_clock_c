@@ -12,16 +12,17 @@ def find_all_files(path):
 
 
 def search_by_template(dirname):
+    d = list()
     for filename in dirname:
         root, ext = os.path.splitext(filename)
         if ext == '.mp4':
-            print(filename)
-
+           d.append(filename)
+    return d
 
 def flow():
     files = find_all_files(os.getcwd())
-    search_by_template(files)
-
+    video = search_by_template(files)
+    print(video)
 if __name__ == "__main__":
     flow()
 
