@@ -26,21 +26,22 @@ def find_free_space():
 
 def check_categories(file):
     date_creation = convert_name_to_datetime(file)
-    today = datetime.datetime.today()
+    today = datetime.datetime.now()
     #most old
-    undef_delta = today - datetime.timedelta(days = 16)
+    undef_delta = today - datetime.timedelta(days = 17)
     seven_day_delta = today-datetime.timedelta(days = 7)
     fifteen_day_delta = today -datetime.timedelta(days = 15)
     categories = dict()
-    if date_creation < seven_day_delta:
+    if seven_day_delta <= date_creation:
         categories = {'seven_days' :[]}
         categories['seven_days'].append(date_creation)
         categories['seven_days'].append(file)
-    if date_creation >= fifteen_day_delta:
+    elif fifteen_day_delta < date_creation:
         categories = {'fifteen_days' :[]}
         categories['fifteen_days'].append(date_creation)
         categories['fifteen_days'].append(file)
-    if date_creation <= undef_delta:
+    else:
+        print(undef_delta < date_creation)
         categories = {'indef' :[]}
         categories['indef'].append(date_creation)
         categories['indef'].append(file)
@@ -54,7 +55,7 @@ def check_categories(file):
 def main():
     #space = find_free_space()
     #condition = delite_by_condition(stock_size,space)
-    print(check_categories("cam42_09_06_2019___01_30_15.mp4"))
+    print(check_categories("cam42_02_06_2019___18_00_01.mp4"))
 
 
 if __name__ == "__main__":
