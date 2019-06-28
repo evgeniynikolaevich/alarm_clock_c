@@ -19,11 +19,13 @@ def search_by_template(dirname):
            d.append(filename)
     return d
 
-def flow():
+def search_videos():
     files = find_all_files(os.getcwd())
     video = search_by_template(files)
-    print(video)
+    return video
+
 if __name__ == "__main__":
-    flow()
+    print(find_all_files(os.getcwd()))
+
 
 

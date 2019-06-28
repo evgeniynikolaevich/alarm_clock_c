@@ -7,6 +7,8 @@ import datetime
 def get_path_from_name(name):
     path = os.path.abspath(name)
     return path
+
+
 def return_name(path):
     filename = os.path.splitext(path)[0]
     name = filename.split('/')[-1]
@@ -49,32 +51,32 @@ def create_limit():
 def find_older_one_hour_files(name_path):
     #fix compare staff
     limit = create_limit()
-    older_one_hour = ""
     for name,path in name_path.items():
         time_creation = convert_name_to_datetime(name)
-        if time_creation <= limit:
-            older_one_hour = name
-    return older_one_hour
+        if time_creation >= limit:
+	    try:
+                return name
+            except:
+                continue
+	          
 
 def find_weight(path_to_file):
-    statinfo = os.stat(get_path_from_name(path_to_file))
-    size = statinfo.st_size
-    return size
+    try:
+    	statinfo = os.stat(get_path_from_name(path_to_file+'.mp4'))
+    	size = statinfo.st_size
+    	return size
+    except:
+	pass
 
-
-def main():
-    #1
-    path = get_path_from_name('cam29_25_06_2019___19_40_01.mp4')
-    #2
+def find_size(filename):
+    path = get_path_from_name(filename)
     name = return_name(path)
     name_path = create_name_path(name,path)
-    #operation compare and return path
-
-    file_older_one_hour =find_older_one_hour_files(name_path)
-    weight = find_weight(file_older_one_hour+'.mp4')
-    print(weight)
+    file_older_one_hour = find_older_one_hour_files(name_path)
+    weight = find_weight(file_older_one_hour)
+    
     return weight
 
 
-if __name__ == "__main__":
-    main()
+
+
