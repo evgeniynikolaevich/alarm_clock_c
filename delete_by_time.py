@@ -1,7 +1,11 @@
 import os
+import datetime
 requeried_space = 1
 limit = 2
 stock_size = 2000
+from file_size import convert_name_to_datetime
+
+
 def find_free_space():
     result=os.statvfs('/')
     block_size=result.f_frsize
@@ -15,103 +19,46 @@ def find_free_space():
     return free_size*1000
 
 
-def find_list():
-#change import from show video for import specific files
-
-    path_ = os.getcwd()
-    files = os.listdir(path_)
-    return files(path_)
-
-
-def date_analizator(date):
-    #date today
-    #seven_day_delay
-    #fiteen_day_delay
-    #unlimited_delay
-    if date < delay:
 
 
 
-def unpack_date(file):
-    pass
 
 
-def pack_date(file):
-    pass
-
-
-
-def find_categories(date_creation):
+def check_categories(file):
+    date_creation = convert_name_to_datetime(file)
     today = datetime.datetime.today()
     #most old
     undef_delta = today - datetime.timedelta(days = 16)
-    seven_day_delta = todaydatetime.timedelta(days = 7)
-    fifteen_day_delta = datetime.timedelta(day = 15)
-
-    categories = {'indef':[],'seven_days':[],'fifteen_days':[]}
-    date = find_date_creation(date_creation)
-    if date_creation > sevenday_delta:
-        categories['seven_day'].append(date_creation)
-    if date_creation <= fifteen_day_delta
-        categories['fifteen_day'].append(date_creation)
-    if date_creation >= undef_delta:
+    seven_day_delta = today-datetime.timedelta(days = 7)
+    fifteen_day_delta = today -datetime.timedelta(days = 15)
+    categories = dict()
+    if date_creation < seven_day_delta:
+        categories = {'seven_days' :[]}
+        categories['seven_days'].append(date_creation)
+        categories['seven_days'].append(file)
+    if date_creation >= fifteen_day_delta:
+        categories = {'fifteen_days' :[]}
+        categories['fifteen_days'].append(date_creation)
+        categories['fifteen_days'].append(file)
+    if date_creation <= undef_delta:
+        categories = {'indef' :[]}
         categories['indef'].append(date_creation)
+        categories['indef'].append(file)
 
     return categories
 
-def del_by_category(categories):
-    if len(categories["indef"]) != 0:
-        delite_file(categories['indef'])
-        del categories['indef'][]
-    if len(categories['fifteen_day']) !=0:
-        delite_file(categories['seven_day'])
-        del categories['seven_day'][]
-    if len(categories['seven_day']) !=0:
-        delite_file(categories['seven_day'])
-        del categories['seven_day'][]
-
-
-
-def main()
-
-
-
-
-def delete_file(filename):
-    os.remove(filename)
-
-def delite_by_condition(stock_size,space):
-    if space > stock_size:
-        print("You have enough space")
-    else:
-        enough = False
-        counter()
-
-
-def counter():
 
 
 
 
 def main():
-    space = find_free_space()
-    condition = delite_by_condition(stock_size,space)
-
+    #space = find_free_space()
+    #condition = delite_by_condition(stock_size,space)
+    print(check_categories("cam42_09_06_2019___01_30_15.mp4"))
 
 
 if __name__ == "__main__":
-        print(main())
-
-def separate_by_category(files):
-    files = find_older_files()
+    main()
 
 
-def delete_by_category():
-    files = find_older_files()
-    category = separate_by_category()
-    pass
-
-
-def delete_by_category():
-    pass
 
