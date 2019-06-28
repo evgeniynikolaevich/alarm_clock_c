@@ -25,8 +25,7 @@ def create_name_path(name,path):
 
 
 
-
-def convert_name_to_datetime(name):
+ef convert_name_to_datetime(name):
     #delete mp4 extens
     file = re.findall(r"[\w']+", name)
     #broke by digit
@@ -54,19 +53,14 @@ def find_older_one_hour_files(name_path):
     for name,path in name_path.items():
         time_creation = convert_name_to_datetime(name)
         if time_creation >= limit:
-	    try:
-                return name
-            except:
-                continue
-	          
+           return path
+
 
 def find_weight(path_to_file):
-    try:
-    	statinfo = os.stat(get_path_from_name(path_to_file+'.mp4'))
-    	size = statinfo.st_size
-    	return size
-    except:
-	pass
+    if path_to_file is not None:
+         statinfo = os.stat(path_to_file)
+         size = statinfo.st_size
+         return size
 
 def find_size(filename):
     path = get_path_from_name(filename)
@@ -74,9 +68,6 @@ def find_size(filename):
     name_path = create_name_path(name,path)
     file_older_one_hour = find_older_one_hour_files(name_path)
     weight = find_weight(file_older_one_hour)
-    
     return weight
-
-
 
 

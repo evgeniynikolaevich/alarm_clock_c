@@ -5,7 +5,9 @@ def main():
     files = search_videos()
     files_by_hour = map(find_size,files)
     total_by_hour = sum(filter(None,files_by_hour))
-    print(str(total_by_hour/1000000)+'mb')
+    stock_size = total_by_hour*4
+    print(str(stock_size/1000000)+'mb')
+
 if __name__ == "__main__":
     main()
 
