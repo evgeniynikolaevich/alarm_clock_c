@@ -11,8 +11,11 @@ def get_path_from_name(name):
 
 def return_name(path):
     filename = os.path.splitext(path)[0]
-    name = filename.split('/')[-1]
-    return name
+    file = filename.split('/')[-1]
+    name = re.findall(r"[\w']+", file)
+    video_name = name.pop()
+    if re.match(r'^\w\w\w\d\d_\d\d_\d\d_\d{4}___\d\d_\d\d_\d\d',video_name):
+        return video_name
 
 
 
@@ -25,20 +28,23 @@ def create_name_path(name,path):
 
 
 
-ef convert_name_to_datetime(name):
+def convert_name_to_datetime(name):
+    pattern = r'^\w\w\w\d\d_\d\d_\d\d_\d{4}___\d\d_\d\d_\d\d'
     #delete mp4 extens
-    file = re.findall(r"[\w']+", name)
-    #broke by digit
-    w_ext = file[0].split('_')
-    #CONVERT!!!!
-    #time_creation = datetime.time(year =int(w_ext[3]),month=int(w_ext[2]),day =int(w_ext[1]),
-    #                              hour = int(w_ext[6]),min = int(w_ext[7]),sec = int(month[8])
-    #fix datetime
-    dt = datetime.datetime(int(w_ext[3]),int(w_ext[2]),int(w_ext[1]))
-    tm = datetime.time(int(w_ext[6]),int(w_ext[7]),int(w_ext[8]))
-    time_creation = dt.combine(dt, tm)
-    #datetime_object = datetime.strptime('{}/{}/{} {}:{}:{}'.format(int(w_ext[1]),int(w_ext[2]),int(w_ext[3]), int(w_ext[6]), int(w_ext[7]), int(w_ext[8])), '%m/%d/%Y %I:%M%p')
-    return time_creation
+    if (re.match(pattern,name) is not None):
+        if name is not None:
+
+            w_ext = name.split('_')
+            print(str(w_ext)+'name!!!!')
+        #CONVERT!!!!
+            #time_creation = datetime.time(year =int(w_ext[3]),month=int(w_ext[2]),day =int(w_ext[1]),
+            #                              hour = int(w_ext[6]),min = int(w_ext[7]),sec = int(month[8])
+            #fix datetime
+            dt = datetime.datetime(int(w_ext[3]),int(w_ext[2]),int(w_ext[1]))
+            tm = datetime.time(int(w_ext[6]),int(w_ext[7]),int(w_ext[8]))
+            time_creation = dt.combine(dt, tm)
+            #datetime_object = datetime.strptime('{}/{}/{} {}:{}:{}'.format(int(w_ext[1]),int(w_ext[2]),int(w_ext[3]), int(w_ext[6]), int(w_ext[7]), int(w_ext[8])), '%m/%d/%Y %I:%M%p')
+            return time_creation
 
 def create_limit():
     today = datetime.datetime.now()
