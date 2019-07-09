@@ -75,5 +75,10 @@ def search_py_files():
 if __name__=="__main__":
     pyfiles = search_py_files()
     results = map(digit_finder,pyfiles)
-    print(list(results))
-
+    s = list(results)
+    counter =0
+    print('_'*1000)
+    for i in s:
+        counter+=1
+        print(str(counter)+')'+str(i[0]))
+        print(str(i[1])+'\n')
