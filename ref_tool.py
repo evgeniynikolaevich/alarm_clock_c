@@ -41,8 +41,7 @@ def digit_finder(filename):
     digits = remove_words(clean)
     #count duplicates
     e = dict(Counter(digits))
-    #sort counters
-    d = OrderedDict(sorted(e.items()))
+    d = OrderedDict(sorted(e.items(), key=lambda t: t[1]))
     name_with_digits.append(filename)
     name_with_digits.append(d)
     return name_with_digits
