@@ -1,5 +1,7 @@
 import re
-def one():
+from collections import Counter,OrderedDict
+
+def broke_lines():
     allNums = []
     total = []
     with open("1.py", "r+") as f:
@@ -12,7 +14,7 @@ def one():
         return total
 
 
-def two(files):
+def delete_garbage(files):
     f = []
     mylist_n = [j for i in files for j in i]
     for mylist in mylist_n:
@@ -21,17 +23,22 @@ def two(files):
     return f
 
 
-
-
+def remove_words(files):
+    n =[]
+    for file in files:
+        if re.match(r'^([0-9]{1,10})',file):
+            n.append(file)
+    return n
 
 
 def flow():
 
-    files = one()
-    clean = two(files)
-    print(clean)
-
-
+    files = broke_lines()
+    clean = delete_garbage(files)
+    digits = remove_words(clean)
+    e = dict(Counter(digits))
+    d = OrderedDict(sorted(e.items()))
+    print(d)
 
 
 if __name__ == "__main__":
